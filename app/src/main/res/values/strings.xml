@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Book Library</string>
+    <string name="login">Đăng nhập</string>
+    <string name="password">Mật khẩu</string>
+    <string name="username">Tài khoản</string>
+    <string name="book">Sách</string>
+    <string name="profile">Thông tin</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register">Đăng ký</string>
+    <string name="name">Tên</string>
+    <string name="update">Thay đổi</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="read_more">Xem thêm</string>
+    <string name="home">Trang chủ</string>
+    <string name="analytic">Thống kê</string>
+    <string name="add_book">Thêm sách</string>
+    <string name="book_image">Book image</string>
+    <string name="book_title">Tên Sách</string>
+    <string name="book_scription">Mô tả</string>
+    <string name="member">Thành viên</string>
+    <string name="add_member">Thêm thành viên</string>
+    <string name="price">Giá</string>
+    <string name="list_book">Danh sách sách</string>
+    <string name="overview">Tổng quan</string>
+    <string name="add_or_update">Thêm hoặc thay đổi</string>
+
+    <array name="categories">
+        <item>Khoa học công nghệ</item>
+        <item>Chính trị – pháp luật</item>
+        <item>Văn học nghệ thuật</item>
+        <item>Văn hóa xã hội – Lịch sử</item>
+        <item>Tâm lý, tâm linh, tôn giáo</item>
+        <item>Sách thiếu nhio</item>
+    </array>
+</resources>

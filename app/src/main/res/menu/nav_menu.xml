@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mnu_book"
+        android:icon="@drawable/outline_home_24"
+
+        android:title="@string/home" />
+
+<!--    <item-->
+<!--        android:id="@+id/mnu_analytic"-->
+<!--        android:icon="@drawable/outline_analytics_24"-->
+<!--        android:title="@string/analytic"-->
+<!--        />-->
+
+    <item
+        android:id="@+id/mnu_member"
+        android:icon="@drawable/outline_groups_24"
+        android:title="@string/member"
+        />
+
+    <item
+        android:id="@+id/mnu_profile"
+        android:icon="@drawable/outline_manage_accounts_24"
+        android:title="@string/profile" />
+</menu>
