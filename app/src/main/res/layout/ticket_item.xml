@@ -51,6 +51,7 @@
                     android:textStyle="bold" />
 
 
+
                 <TextView
                     android:id="@+id/borrow_date"
                     android:layout_width="wrap_content"

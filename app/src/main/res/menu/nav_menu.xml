@@ -5,11 +5,11 @@
 
         android:title="@string/home" />
 
-<!--    <item-->
-<!--        android:id="@+id/mnu_analytic"-->
-<!--        android:icon="@drawable/outline_analytics_24"-->
-<!--        android:title="@string/analytic"-->
-<!--        />-->
+    <item
+        android:id="@+id/mnu_analytic"
+        android:icon="@drawable/outline_analytics_24"
+        android:title="@string/analytic"
+        />
 
     <item
         android:id="@+id/mnu_member"

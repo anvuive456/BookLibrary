@@ -33,6 +33,14 @@
                 android:textStyle="bold"
                 android:text="Tên" />
 
+            <TextView
+                android:id="@+id/mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:text="Email" />
+
 
 
 

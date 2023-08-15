@@ -4,14 +4,20 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.consoft.booklibrary.adapter.TicketAdapter
+import com.consoft.booklibrary.base.EmailService
 import com.consoft.booklibrary.databinding.ActivityTicketBinding
 import com.consoft.booklibrary.db.AppDatabase
+import com.consoft.booklibrary.model.TicketStatus
 import com.consoft.booklibrary.model.TicketWithBookAndMember
+import java.time.LocalDate
+import javax.mail.MessagingException
 
 class TicketActivity : AppCompatActivity() {
   lateinit var binding: ActivityTicketBinding
@@ -55,6 +61,39 @@ class TicketActivity : AppCompatActivity() {
 
     })
 
+    binding.btnNotifyEmail.setOnClickListener {
+      val thread = Thread {
+        Looper.prepare()
+        try {
+
+          //duyệt các ticket có ngày trả là mai và trạng thái là đang mượn
+          for (ticket in tickets) {
+            if (ticket.ticket.dueDate.compareTo(LocalDate.now()) == 1
+              && ticket.ticket.status == TicketStatus.Borrowing
+            ) {
+
+              //gửi mail tới email của thành viên
+              val mail = EmailService(
+                emails = arrayOf(ticket.member.email),
+                body = "Sách của bạn sắp tới hạn. Vui lòng thanh toán và trả sách.",
+                subject = "Thông báo sắp tới hạn trả sách ${ticket.book.title}"
+              )
+              mail.sendmail()
+            }
+          }
+
+          Toast.makeText(applicationContext, "Đã gửi tới mọi thành viên", Toast.LENGTH_LONG)
+            .show()
+        } catch (e: MessagingException) {
+          Toast.makeText(
+            applicationContext,
+            "Không thể gửi mail:${e.localizedMessage}",
+            Toast.LENGTH_LONG
+          ).show()
+        }
+      }
+      thread.start()
+    }
     loadTickets()
   }
 

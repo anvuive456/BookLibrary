@@ -9,6 +9,7 @@ import androidx.room.Update
 import androidx.room.Upsert
 import com.consoft.booklibrary.model.Ticket
 import com.consoft.booklibrary.model.TicketWithBookAndMember
+import java.time.LocalDate
 
 @Dao
 interface TicketDao {
@@ -42,4 +43,21 @@ interface TicketDao {
   )
   fun get5Tickets(): List<TicketWithBookAndMember>
 
+
+  @Query(
+    "SELECT ticket.*, books.*, member.* FROM ticket "
+            + "INNER JOIN books ON ticket.book_Id = books.bookId "
+            + "INNER JOIN member ON ticket.member_Id = member.memberId "
+            + "WHERE dueDate BETWEEN date(:startDate) AND date(:endDate)"
+  )
+  fun getTicketsByDate(startDate: LocalDate, endDate: LocalDate): List<TicketWithBookAndMember>
+
+  @Query("SELECT * FROM ticket WHERE borrowDate = :day")
+  fun getTicketsByDay(day: String): List<Ticket>
+  @Query("SELECT * FROM ticket WHERE substr(borrowDate, 6, 2) = :month")
+  fun getTicketsByMonth(month: String): List<Ticket>
+  @Query("SELECT * FROM ticket WHERE substr(borrowDate, 1, 4) = :year")
+  fun getTicketsByYear(year: String): List<Ticket>
+  @Query("SELECT * FROM ticket WHERE (substr(borrowDate, 6, 2) BETWEEN :startMonth AND :endMonth) AND substr(borrowDate, 1, 4) = :year")
+  fun getTicketsByQuarter(startMonth: String, endMonth: String, year: String): List<Ticket>
 }

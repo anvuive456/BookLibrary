@@ -37,10 +37,10 @@ class MainActivity : AppCompatActivity() {
           loadFragment(MemberFragment())
           return@setOnItemSelectedListener true
         }
-//        R.id.mnu_analytic -> {
-//          loadFragment(AnalyticFragment())
-//          return@setOnItemSelectedListener true
-//        }
+        R.id.mnu_analytic -> {
+          loadFragment(AnalyticFragment())
+          return@setOnItemSelectedListener true
+        }
       }
       return@setOnItemSelectedListener false
     }

@@ -32,7 +32,7 @@ abstract class AppDatabase : RoomDatabase() {
 
 
   companion object {
-    const val VERSION: Int = 12
+    const val VERSION: Int = 13
     const val EXPORT_SCHEMA: Boolean = false
 
     //Khởi tạo instance cho class db này

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
@@ -36,6 +37,8 @@ class AddTicketActivity : AppCompatActivity() {
     } else {
       ticket = intent.getParcelableExtra<Ticket>("ticket")!!
     }
+
+    Log.w("ticket id","book: ${ticket.book_Id}member: ${ticket.member_Id}")
 
     initBooks()
     initMembers()
@@ -72,6 +75,8 @@ class AddTicketActivity : AppCompatActivity() {
     binding.spnBook.adapter =
       ArrayAdapter<Book>(applicationContext, android.R.layout.simple_spinner_item, books)
 
+    val ids = books.map { it.bookId }
+    binding.spnBook.setSelection(ids.indexOf(ticket.book_Id))
   }
 
   fun initMembers() {
@@ -81,6 +86,9 @@ class AddTicketActivity : AppCompatActivity() {
 
     binding.spnMember.adapter =
       ArrayAdapter<Member>(applicationContext, android.R.layout.simple_spinner_item, members)
+   val ids = members.map { it.memberId }
+    binding.spnMember.setSelection(ids.indexOf(ticket.member_Id))
+
   }
 
   fun initPickers() {

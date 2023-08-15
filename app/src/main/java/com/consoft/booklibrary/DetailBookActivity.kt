@@ -90,8 +90,6 @@ class DetailBookActivity : AppCompatActivity() {
     binding.edtDescription.setText(book.description)
     binding.edtPrice.setText(book.price.toString())
 
-    val selectedCategoryIndex = resources.getStringArray(R.array.categories).indexOf(book.category)
-    binding.spnCategory.setSelection(selectedCategoryIndex)
 
     binding.image.setOnClickListener {
       ImagePicker.with(this)
@@ -124,6 +122,10 @@ class DetailBookActivity : AppCompatActivity() {
         R.array.categories,
         android.R.layout.simple_spinner_item
       )
+    binding.spnCategory.adapter = spinnerAdapter
+
+    val selectedCategoryIndex = spinnerAdapter.getPosition(book.category)
+    binding.spnCategory.setSelection(selectedCategoryIndex)
 
     binding.spnCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -135,7 +137,6 @@ class DetailBookActivity : AppCompatActivity() {
       }
 
     }
-    binding.spnCategory.adapter = spinnerAdapter
 
     binding.btnUpdate.setOnClickListener {
       db.bookDao().update(book)

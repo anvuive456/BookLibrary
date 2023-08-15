@@ -75,4 +75,11 @@ dependencies {
     //Phải thêm  maven { url "https://jitpack.io" } vào dependencyResolutionManagement/repositories trong settings.gradle
     implementation 'com.github.dhaval2404:imagepicker:2.1'
 
+    //Gửi mail
+    implementation 'com.sun.mail:android-mail:1.6.0'
+    implementation 'com.sun.mail:android-activation:1.6.0'
+
+    //Biểu đồ
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 }

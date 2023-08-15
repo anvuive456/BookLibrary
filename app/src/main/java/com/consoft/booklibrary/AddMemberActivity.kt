@@ -3,6 +3,7 @@ package com.consoft.booklibrary
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.Toast
@@ -29,7 +30,8 @@ class AddMemberActivity : AppCompatActivity() {
       member = intent.getParcelableExtra<Member>("member")!!
     } else member = Member()
 
-    binding.edtTitle.setText(member.name)
+    binding.edtName.setText(member.name)
+    binding.edtEmail.setText(member.email)
     binding.dobPicker.init(
       member.birthday.year,
       member.birthday.monthValue - 1,
@@ -50,8 +52,22 @@ class AddMemberActivity : AppCompatActivity() {
       }
     )
 
-    binding.edtTitle.addTextChangedListener {
+    binding.edtName.addTextChangedListener {
       member = member.copy(name = it.toString())
+
+      //tên rỗng thì hiển thị lỗi
+      if(!member.isValidName){
+        binding.edtName.error = "Tên không được trống"
+      }
+    }
+
+    binding.edtEmail.addTextChangedListener {
+      member = member.copy(email = it.toString())
+
+      //email rỗng hoặc ko đúng định dạng hiển thị lỗi
+      if(!member.isValidEmail){
+        binding.edtEmail.error = "Email không được rỗng và phải đúng định dạng"
+      }
     }
 
     binding.btnTogglePicker.setOnClickListener {
@@ -63,20 +79,12 @@ class AddMemberActivity : AppCompatActivity() {
       }
     }
 
-//    binding.dobPicker.maxDate = LocalDate.now().toEpochDay()
-//    binding.dobPicker.setOnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
-//      member = member.copy(
-//        birthday = LocalDate.of(
-//          year, monthOfYear, dayOfMonth
-//        )
-//      )
-//    }
 
     binding.btnAdd.setOnClickListener {
-      if (member.name.isEmpty() || member.formattedBirthday.isEmpty()) {
-        Toast.makeText(applicationContext, "Tên và ngày sinh phải đc chọn", Toast.LENGTH_LONG)
-          .show()
-      } else {
+
+
+      Log.w("validate","${member.isValidEmail} ${member.isValidName}")
+      if (member.isValidEmail && member.isValidName) {
         //Nếu chưa có data thì thêm mới không thì update data cũ
         db.memberDao().insert(member)
         intent.putExtra("member", member)

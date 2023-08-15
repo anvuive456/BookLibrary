@@ -30,6 +30,7 @@ class MemberAdapter(
     with(holder) {
       with(members[position]) {
         binding.title.text = this.member.name
+        binding.mail.text = this.member.email
         binding.createdDate.text = this.member.formattedBirthday
         binding.card.setOnClickListener {
           onClick(this.member)
